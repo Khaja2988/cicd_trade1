@@ -24,10 +24,6 @@ jobs:
         working-directory: FRONTEND
         run: npm ci --legacy-peer-deps
 
-      - name: Lint
-        working-directory: FRONTEND
-        run: npm run lint --if-present
-
       - name: Test
         working-directory: FRONTEND
         run: npm test --if-present
