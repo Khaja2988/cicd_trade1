@@ -64,7 +64,7 @@ function App() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Toaster position="top-right" />
-      <Router>
+      <Router basename={import.meta.env.BASE_URL}>
         <Routes>
           {/* Public Routes */}
           <Route path="/" element={<><Navbar /><Landing /></>} />
