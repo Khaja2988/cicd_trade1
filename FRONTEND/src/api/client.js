@@ -1,4 +1,5 @@
 // Enhanced Mock data and local storage for standalone frontend
+import axios from 'axios';
 const MOCK_STOCKS = [
   { id: 1, symbol: 'AAPL', name: 'Apple Inc.', sector: 'Technology', currentPrice: 175.50, priceChange: 2.50, priceChangePercent: 1.45, volume: 45200000, marketCap: '2.7T', pe: 28.5, high52: 199.62, low52: 124.17 },
   { id: 2, symbol: 'GOOGL', name: 'Alphabet Inc.', sector: 'Technology', currentPrice: 2950.00, priceChange: -25.00, priceChangePercent: -0.84, volume: 1200000, marketCap: '1.9T', pe: 25.2, high52: 3079.00, low52: 2200.00 },
@@ -107,8 +108,30 @@ const MOCK_TRADES = [
 ];
 
 // Mock API for standalone frontend
-// Backend removed: force mock-only mode
-const axiosInstance = null;
+// Try real backend first via Axios; fall back to mocks if unavailable
+const DEFAULT_BASE_URL = 'http://ec2-52-66-202-36.ap-south-1.compute.amazonaws.com';
+const API_BASE_URL =
+  (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.VITE_API_BASE_URL) ||
+  DEFAULT_BASE_URL;
+
+const axiosInstance = axios.create({
+  baseURL: API_BASE_URL,
+  headers: {
+    'Content-Type': 'application/json'
+  }
+});
+
+// Attach token if present
+axiosInstance.interceptors.request.use((config) => {
+  try {
+    const token = localStorage.getItem('token');
+    if (token) {
+      config.headers = config.headers || {};
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+  } catch (_) {}
+  return config;
+});
 
 export const tradingAPI = {
   // Auth - Mock implementation
