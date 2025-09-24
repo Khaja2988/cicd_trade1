@@ -1,9 +1,9 @@
-name: pages build and deployment
+name: pages build and deployment (disabled)
 
 on:
   push:
-    branches: [ main ]
-  workflow_dispatch:
+    branches: [ never-run-this-branch ]
+  workflow_dispatch: # keep manual trigger but do nothing
 
 permissions:
   contents: read
@@ -15,44 +15,9 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build:
+  noop:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: 'npm'
-          cache-dependency-path: FRONTEND/package-lock.json
-
-      - name: Install deps
-        working-directory: FRONTEND
-        run: npm ci --legacy-peer-deps
-
-      - name: Build
-        working-directory: FRONTEND
-        env:
-          VITE_API_BASE_URL: ''
-          VITE_BASE_PATH: '/cicd_trade/'
-        run: VITE_BASE_PATH=$VITE_BASE_PATH npm run build
-
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: FRONTEND/dist
-
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+      - run: echo "GitHub Pages workflow disabled in favor of AWS Amplify Hosting"
 
 
