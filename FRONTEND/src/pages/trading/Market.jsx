@@ -77,9 +77,9 @@ const Market = () => {
   );
 
   const formatCurrency = (amount) => {
-    return new Intl.NumberFormat('en-US', {
+    return new Intl.NumberFormat('en-IN', {
       style: 'currency',
-      currency: 'USD'
+      currency: 'INR'
     }).format(amount);
   };
 
@@ -174,7 +174,7 @@ const Market = () => {
             <AreaChart data={chartData}>
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="time" />
-              <YAxis tickFormatter={(value) => `$${value}`} />
+              <YAxis tickFormatter={(value) => `₹${value}`} />
               <RechartsTooltip formatter={(value) => [formatCurrency(value), 'Price']} />
               <Area
                 type="monotone"

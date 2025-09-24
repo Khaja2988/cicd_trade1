@@ -80,7 +80,7 @@ const Register = () => {
               Create Trading Account
             </Typography>
             <Typography variant="body1" align="center" color="text.secondary" sx={{ mb: 4 }}>
-              Start your virtual trading journey with $10,000 virtual cash
+              Start your virtual trading journey with ₹10,00,000 virtual cash
             </Typography>
             
             {error && (

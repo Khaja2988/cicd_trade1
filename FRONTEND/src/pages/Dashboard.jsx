@@ -209,12 +209,12 @@ const Dashboard = () => {
                       <Typography variant="h6">Portfolio Value</Typography>
                     </Box>
                     <Typography variant="h4" sx={{ fontWeight: 600, mb: 1 }}>
-                      $11,250.00
+                      ₹11,250.00
                     </Typography>
                     <Box sx={{ display: 'flex', alignItems: 'center' }}>
                       <TrendingUp color="success" sx={{ mr: 0.5 }} />
                       <Typography color="success.main" sx={{ fontWeight: 600 }}>
-                        +12.5% (+$1,250)
+                        +12.5% (+₹1,250)
                       </Typography>
                     </Box>
                   </CardContent>
@@ -229,7 +229,7 @@ const Dashboard = () => {
                       <Typography variant="h6">Cash Available</Typography>
                     </Box>
                     <Typography variant="h4" sx={{ fontWeight: 600, mb: 1 }}>
-                      $2,500.00
+                      ₹2,500.00
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
                       Ready to invest
@@ -246,7 +246,7 @@ const Dashboard = () => {
                       <Typography variant="h6">Today's P&L</Typography>
                     </Box>
                     <Typography variant="h4" sx={{ fontWeight: 600, mb: 1, color: 'success.main' }}>
-                      +$125.50
+                      +₹125.50
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
                       +1.13% from yesterday
@@ -289,8 +289,8 @@ const Dashboard = () => {
                       ]}>
                         <CartesianGrid strokeDasharray="3 3" />
                         <XAxis dataKey="day" />
-                        <YAxis tickFormatter={(value) => `$${value.toLocaleString()}`} />
-                        <RechartsTooltip formatter={(value) => [`$${value.toLocaleString()}`, 'Portfolio Value']} />
+                        <YAxis tickFormatter={(value) => `₹${value.toLocaleString()}`} />
+                        <RechartsTooltip formatter={(value) => [`₹${value.toLocaleString()}`, 'Portfolio Value']} />
                         <Line type="monotone" dataKey="value" stroke="#00C853" strokeWidth={3} dot={{ fill: '#00C853', strokeWidth: 2, r: 4 }} />
                       </LineChart>
                     </ResponsiveContainer>
@@ -311,7 +311,7 @@ const Dashboard = () => {
                         />
                         <Box sx={{ textAlign: 'right' }}>
                           <Typography variant="subtitle2" sx={{ fontWeight: 600 }}>
-                            $1,755.00
+                            ₹1,755.00
                           </Typography>
                           <Chip label="+17.0%" color="success" size="small" />
                         </Box>
@@ -323,7 +323,7 @@ const Dashboard = () => {
                         />
                         <Box sx={{ textAlign: 'right' }}>
                           <Typography variant="subtitle2" sx={{ fontWeight: 600 }}>
-                            $14,750.00
+                            ₹14,750.00
                           </Typography>
                           <Chip label="+5.4%" color="success" size="small" />
                         </Box>
@@ -335,7 +335,7 @@ const Dashboard = () => {
                         />
                         <Box sx={{ textAlign: 'right' }}>
                           <Typography variant="subtitle2" sx={{ fontWeight: 600 }}>
-                            $2,560.00
+                            ₹2,560.00
                           </Typography>
                           <Chip label="+6.7%" color="success" size="small" />
                         </Box>
@@ -347,7 +347,7 @@ const Dashboard = () => {
                         />
                         <Box sx={{ textAlign: 'right' }}>
                           <Typography variant="subtitle2" sx={{ fontWeight: 600 }}>
-                            $540.00
+                            ₹540.00
                           </Typography>
                           <Chip label="-10.0%" color="error" size="small" />
                         </Box>
@@ -368,11 +368,11 @@ const Dashboard = () => {
                           <TrendingUp color="success" />
                         </ListItemIcon>
                         <ListItemText
-                          primary="Bought 5 shares of AAPL @ $175.50"
+                          primary="Bought 5 shares of AAPL @ ₹175.50"
                           secondary="2 hours ago"
                         />
                         <Typography variant="body2" color="text.secondary">
-                          +$877.50
+                          +₹877.50
                         </Typography>
                       </ListItem>
                       <ListItem>
@@ -380,11 +380,11 @@ const Dashboard = () => {
                           <TrendingDown color="error" />
                         </ListItemIcon>
                         <ListItemText
-                          primary="Sold 3 shares of MSFT @ $320.00"
+                          primary="Sold 3 shares of MSFT @ ₹320.00"
                           secondary="4 hours ago"
                         />
                         <Typography variant="body2" color="text.secondary">
-                          +$960.00
+                          +₹960.00
                         </Typography>
                       </ListItem>
                       <ListItem>
@@ -392,11 +392,11 @@ const Dashboard = () => {
                           <TrendingUp color="success" />
                         </ListItemIcon>
                         <ListItemText
-                          primary="Bought 2 shares of GOOGL @ $2,950.00"
+                          primary="Bought 2 shares of GOOGL @ ₹2,950.00"
                           secondary="Yesterday"
                         />
                         <Typography variant="body2" color="text.secondary">
-                          +$5,900.00
+                          +₹5,900.00
                         </Typography>
                       </ListItem>
                     </List>

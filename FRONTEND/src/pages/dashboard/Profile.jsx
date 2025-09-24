@@ -3,7 +3,7 @@ import { TrendingUp, AccountBalanceWallet, ShowChart } from '@mui/icons-material
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip as RechartsTooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
 
 const traderProfile = {
-  name: 'Alex Johnson',
+  name: 'KHAJA VALI',
   tradingLevel: 'Intermediate Trader',
   yearsOfExperience: 3,
   totalTrades: 156,
@@ -39,9 +39,9 @@ const pieData = traderProfile.positions.map(position => ({
 const COLORS = ['#00C853', '#1976d2', '#FF9800', '#FF1744'];
 
 const formatCurrency = (amount) => {
-  return new Intl.NumberFormat('en-US', {
+  return new Intl.NumberFormat('en-IN', {
     style: 'currency',
-    currency: 'USD'
+    currency: 'INR'
   }).format(amount);
 };
 
@@ -110,7 +110,7 @@ const Profile = () => (
                   <Typography variant="h6">Total Profit</Typography>
                 </Box>
                 <Typography variant="h4" color="success.main">
-                  ${traderProfile.totalProfit.toLocaleString()}
+                  ₹{traderProfile.totalProfit.toLocaleString()}
                 </Typography>
               </CardContent>
             </Card>

@@ -73,7 +73,7 @@ const MOCK_COMPETITIONS = [
     timeRemaining: '15 days',
     startingBalance: 10000,
     entryFee: 0,
-    prize: 'Top 10 winners share $5,000 prize pool',
+    prize: 'Top 10 winners share ₹5,00,000 prize pool',
     leaderboard: [
       { rank: 1, username: 'TradingPro2024', portfolioValue: 15680, return: 56.8, avatar: '/api/placeholder/40/40' },
       { rank: 2, username: 'StockMaster', portfolioValue: 14230, return: 42.3, avatar: '/api/placeholder/40/40' },

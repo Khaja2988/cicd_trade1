@@ -28,7 +28,7 @@ function StocksOverview() {
                 <tr key={s.symbol}>
                   <td>{s.symbol}</td>
                   <td className="muted">{s.name}</td>
-                  <td>${s.price.toFixed(2)}</td>
+                  <td>₹{s.price.toFixed(2)}</td>
                   <td className={s.change >= 0 ? 'pos' : 'neg'}>
                     {s.change >= 0 ? '+' : ''}{s.change.toFixed(2)}
                   </td>

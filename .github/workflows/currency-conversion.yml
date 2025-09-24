@@ -1,0 +1,137 @@
+name: Currency Conversion Automation
+
+on:
+  workflow_dispatch:
+    inputs:
+      target_currency:
+        description: 'Target currency (INR/USD)'
+        required: true
+        default: 'INR'
+        type: choice
+        options:
+        - INR
+        - USD
+      conversion_rate:
+        description: 'USD to INR conversion rate (optional, will use current rate if not provided)'
+        required: false
+        type: string
+  schedule:
+    # Run daily at 6 AM UTC to check for currency updates
+    - cron: '0 6 * * *'
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/currency-converter.js'
+      - '.github/workflows/currency-conversion.yml'
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  currency-conversion:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: FRONTEND/package-lock.json
+
+      - name: Install dependencies
+        working-directory: FRONTEND
+        run: npm ci --legacy-peer-deps
+
+      - name: Get current USD to INR exchange rate
+        id: exchange-rate
+        run: |
+          if [ -n "${{ github.event.inputs.conversion_rate }}" ]; then
+            echo "rate=${{ github.event.inputs.conversion_rate }}" >> $GITHUB_OUTPUT
+          else
+            RATE=$(curl -s "https://api.exchangerate-api.com/v4/latest/USD" | jq -r '.rates.INR')
+            echo "rate=$RATE" >> $GITHUB_OUTPUT
+          fi
+          echo "Using conversion rate: $RATE"
+
+      - name: Run currency conversion
+        run: |
+          node scripts/currency-converter.js \
+            --target-currency="${{ github.event.inputs.target_currency || 'INR' }}" \
+            --conversion-rate="${{ steps.exchange-rate.outputs.rate }}" \
+            --dry-run=false
+
+      - name: Check for changes
+        id: changes
+        run: |
+          if git diff --quiet; then
+            echo "changed=false" >> $GITHUB_OUTPUT
+            echo "No currency changes detected"
+          else
+            echo "changed=true" >> $GITHUB_OUTPUT
+            echo "Currency changes detected"
+            git diff --stat
+          fi
+
+      - name: Commit and push changes
+        if: steps.changes.outputs.changed == 'true'
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add .
+          git commit -m "🔄 Auto-convert currency to ${{ github.event.inputs.target_currency || 'INR' }} (Rate: ${{ steps.exchange-rate.outputs.rate }})"
+          git push
+
+      - name: Create Pull Request
+        if: steps.changes.outputs.changed == 'true' && github.event_name == 'schedule'
+        uses: peter-evans/create-pull-request@v5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "🔄 Daily currency conversion to ${{ github.event.inputs.target_currency || 'INR' }}"
+          title: "Daily Currency Conversion - $(date +'%Y-%m-%d')"
+          body: |
+            ## Currency Conversion Update
+            
+            This PR contains automatic currency conversion updates:
+            
+            - **Target Currency**: ${{ github.event.inputs.target_currency || 'INR' }}
+            - **Exchange Rate**: ${{ steps.exchange-rate.outputs.rate }} USD to INR
+            - **Date**: $(date)
+            
+            ### Changes Made:
+            - Updated all currency formatting functions
+            - Converted hardcoded currency values
+            - Updated competition prizes
+            - Updated registration virtual cash amounts
+            
+            ### Files Modified:
+            ```bash
+            $(git diff --name-only)
+            ```
+          branch: currency-conversion-$(date +%Y%m%d)
+          delete-branch: true
+
+      - name: Run tests after conversion
+        if: steps.changes.outputs.changed == 'true'
+        working-directory: FRONTEND
+        run: |
+          npm run build
+          echo "✅ Build successful after currency conversion"
+
+      - name: Notify completion
+        if: always()
+        run: |
+          if [ "${{ steps.changes.outputs.changed }}" == "true" ]; then
+            echo "✅ Currency conversion completed successfully"
+            echo "🔄 Converted to: ${{ github.event.inputs.target_currency || 'INR' }}"
+            echo "📊 Exchange rate: ${{ steps.exchange-rate.outputs.rate }}"
+          else
+            echo "ℹ️ No currency changes were needed"
+          fi

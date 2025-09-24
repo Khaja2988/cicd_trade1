@@ -1,4 +1,13 @@
 {
+  "name": "cicd-pro",
+  "version": "1.0.0",
+  "description": "Virtual Stock Trading App with CI/CD",
+  "scripts": {
+    "convert-currency": "node scripts/currency-converter.js",
+    "convert-to-inr": "node scripts/currency-converter.js --target-currency=INR --conversion-rate=83.0",
+    "convert-to-usd": "node scripts/currency-converter.js --target-currency=USD --conversion-rate=0.012",
+    "currency-dry-run": "node scripts/currency-converter.js --dry-run"
+  },
   "devDependencies": {
     "gh-pages": "^6.3.0"
   }

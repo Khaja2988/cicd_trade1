@@ -26,10 +26,10 @@ function Portfolio() {
         <div className="portfolio-header">
           <h2>My Portfolio</h2>
           <div className="portfolio-summary">
-            <div><span className="label">Invested</span><span>${totals.cost.toFixed(2)}</span></div>
-            <div><span className="label">Current Value</span><span>${totals.value.toFixed(2)}</span></div>
+            <div><span className="label">Invested</span><span>₹{totals.cost.toFixed(2)}</span></div>
+            <div><span className="label">Current Value</span><span>₹{totals.value.toFixed(2)}</span></div>
             <div className={totals.pnl >= 0 ? 'pos' : 'neg'}>
-              <span className="label">PnL</span><span>${totals.pnl.toFixed(2)} ({pct.toFixed(2)}%)</span>
+              <span className="label">PnL</span><span>₹{totals.pnl.toFixed(2)} ({pct.toFixed(2)}%)</span>
             </div>
           </div>
         </div>
@@ -52,8 +52,8 @@ function Portfolio() {
                   <tr key={h.symbol}>
                     <td>{h.symbol}</td>
                     <td>{h.qty}</td>
-                    <td>${h.avg.toFixed(2)}</td>
-                    <td>${h.price.toFixed(2)}</td>
+                    <td>₹{h.avg.toFixed(2)}</td>
+                    <td>₹{h.price.toFixed(2)}</td>
                     <td className={pnl >= 0 ? 'pos' : 'neg'}>{pnl >= 0 ? '+' : ''}{pnl.toFixed(2)}</td>
                   </tr>
                 )

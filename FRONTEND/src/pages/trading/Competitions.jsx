@@ -65,7 +65,7 @@ const Competitions = () => {
       timeRemaining: '15 days',
       startingBalance: 10000,
       entryFee: 0,
-      prize: 'Top 10 winners share $5,000 prize pool',
+      prize: 'Top 10 winners share ₹5,00,000 prize pool',
       leaderboard: [
         { rank: 1, username: 'TradingPro2024', portfolioValue: 15680, return: 56.8, avatar: '/api/placeholder/40/40' },
         { rank: 2, username: 'StockMaster', portfolioValue: 14230, return: 42.3, avatar: '/api/placeholder/40/40' },
@@ -88,7 +88,7 @@ const Competitions = () => {
       timeRemaining: 'Starts in 2 days',
       startingBalance: 50000,
       entryFee: 10,
-      prize: 'Winner takes all: $2,500',
+      prize: 'Winner takes all: ₹2,50,000',
       leaderboard: [],
       myRank: null,
       myPortfolioValue: null,
@@ -105,7 +105,7 @@ const Competitions = () => {
       timeRemaining: 'Ended',
       startingBalance: 5000,
       entryFee: 0,
-      prize: 'Top 20 winners share $1,000 prize pool',
+      prize: 'Top 20 winners share ₹1,00,000 prize pool',
       leaderboard: [
         { rank: 1, username: 'NewTrader99', portfolioValue: 8750, return: 75.0, avatar: '/api/placeholder/40/40' },
         { rank: 2, username: 'LearningFast', portfolioValue: 8200, return: 64.0, avatar: '/api/placeholder/40/40' },
