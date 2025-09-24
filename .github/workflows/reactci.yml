@@ -35,8 +35,8 @@ jobs:
       - name: Build the project
         working-directory: FRONTEND
         env:
-          VITE_BASE_PATH: '/${{ github.event.repository.name }}/'
-        run: npm run build
+          VITE_BASE_PATH: '/cicd_trade/'
+        run: VITE_BASE_PATH=$VITE_BASE_PATH npm run build
 
       - name: Upload build artifact
         uses: actions/upload-artifact@v4

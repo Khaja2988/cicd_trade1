@@ -4,7 +4,9 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm ci --legacy-peer-deps
 COPY . .
-RUN npm run build
+# Ensure Docker build uses root path base
+ENV VITE_BASE_PATH=/
+RUN VITE_BASE_PATH=$VITE_BASE_PATH npm run build
 
 # Serve stage
 FROM nginx:alpine

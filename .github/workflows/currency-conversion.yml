@@ -68,6 +68,12 @@ jobs:
             --conversion-rate="${{ steps.exchange-rate.outputs.rate }}" \
             --dry-run=false
 
+      - name: Rebuild with correct base path
+        working-directory: FRONTEND
+        env:
+          VITE_BASE_PATH: '/cicd_trade/'
+        run: VITE_BASE_PATH=$VITE_BASE_PATH npm run build
+
       - name: Check for changes
         id: changes
         run: |

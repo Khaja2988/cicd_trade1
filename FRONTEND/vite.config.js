@@ -4,7 +4,8 @@ import react from '@vitejs/plugin-react'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: '/cicd_trade/',
+  // Use env-provided base path for different targets (Docker: '/', Pages: '/cicd_trade/')
+  base: process.env.VITE_BASE_PATH ?? '/',
   build: {
     outDir: 'dist',
     assetsDir: 'assets',
