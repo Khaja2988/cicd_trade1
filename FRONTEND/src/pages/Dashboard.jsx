@@ -289,8 +289,8 @@ const Dashboard = () => {
                       ]}>
                         <CartesianGrid strokeDasharray="3 3" />
                         <XAxis dataKey="day" />
-                        <YAxis tickFormatter={(value) => `₹${value.toLocaleString()}`} />
-                        <RechartsTooltip formatter={(value) => [`₹${value.toLocaleString()}`, 'Portfolio Value']} />
+                        <YAxis tickFormatter={(value) => `₹₹{value.toLocaleString()}`} />
+                        <RechartsTooltip formatter={(value) => [`₹₹{value.toLocaleString()}`, 'Portfolio Value']} />
                         <Line type="monotone" dataKey="value" stroke="#00C853" strokeWidth={3} dot={{ fill: '#00C853', strokeWidth: 2, r: 4 }} />
                       </LineChart>
                     </ResponsiveContainer>
