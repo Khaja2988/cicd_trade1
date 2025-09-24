@@ -84,10 +84,7 @@ const Portfolio = () => {
   const COLORS = ['#00C853', '#1976d2', '#FF9800', '#FF1744'];
 
   const formatCurrency = (amount) => {
-    return new Intl.NumberFormat('en-IN', {
-      style: 'currency',
-      currency: 'INR'
-    }).format(amount);
+    return new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(amount);
   };
 
   const formatPercent = (percent) => {
