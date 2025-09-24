@@ -132,7 +132,7 @@ Currently uses mock data for demonstration. In a production environment, you wou
 
 - Real-time market data APIs (Alpha Vantage, IEX Cloud, etc.)
 - Financial news APIs (NewsAPI, Financial Modeling Prep, etc.)
-- User authentication services
+- User authentication 
 - Database for portfolio and trade data
 
 ## 🚀 Deployment
